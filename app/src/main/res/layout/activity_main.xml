@@ -1,0 +1,37 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:id="@+id/main"> <!-- Lisätty ID tähän -->
+
+    <Button
+        android:id="@+id/btnCreateLutemon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Luo uusi Lutemon"
+        android:onClick="goToCreateLutemon" />
+
+    <Button
+        android:id="@+id/btnListLutemons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Listaa Lutemonit"
+        android:onClick="goToListLutemons" />
+
+    <Button
+        android:id="@+id/btnMoveLutemons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Siirrä Lutemoneja"
+        android:onClick="goToMoveLutemons" />
+
+    <Button
+        android:id="@+id/btnBattle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Taistelu"
+        android:onClick="goToBattle" />
+</LinearLayout>

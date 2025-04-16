@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">olioharkkatyö2</string>
+    <string-array name="locations">
+        <item>Koti</item>
+        <item>Treeni</item>
+        <item>Areena</item>
+    </string-array>
+</resources>

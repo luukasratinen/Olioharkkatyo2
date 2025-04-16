@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:id="@+id/main"> <!-- Lisää tämä ID:llä -->
+
+    <EditText
+        android:id="@+id/etLutemonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Anna Lutemonin nimi" />
+
+    <RadioGroup
+        android:id="@+id/rgColors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton android:text="Valkoinen" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <RadioButton android:text="Vihreä" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <RadioButton android:text="Pinkki" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <RadioButton android:text="Oranssi" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <RadioButton android:text="Musta" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnCreateLutemon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Luo"
+        android:onClick="createLutemon" />
+</LinearLayout>

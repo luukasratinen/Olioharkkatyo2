@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Spinner, johon valitaan sijainti -->
+    <Spinner
+        android:id="@+id/spinnerLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- ListView Lutemonin valintaan -->
+    <ListView
+        android:id="@+id/listViewLutemons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:choiceMode="multipleChoice" />
+
+    <!-- Siirtopainike -->
+    <Button
+        android:id="@+id/btnMoveLutemons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Siirrä Lutemoneja"
+        android:onClick="moveLutemons" />
+</LinearLayout>
