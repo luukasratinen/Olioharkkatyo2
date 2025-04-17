@@ -1,6 +1,5 @@
 package com.example.olioharkkaty2;
 
-
 public class Lutemon {
     private int id;
     private String name;
@@ -10,6 +9,7 @@ public class Lutemon {
     private int experience;
     private int health;
     private int maxHealth;
+    private String location = "Koti";
 
     public Lutemon(int id, String name, String color, int attack, int defense, int health) {
         this.id = id;
@@ -29,6 +29,12 @@ public class Lutemon {
     public int getDefense() { return defense; }
     public int getHealth() { return health; }
     public int getExperience() { return experience; }
+    public String getLocation() { return location; }
+    public void setLocation(String location) { this.location = location; }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
 
     public void takeDamage(int damage) {
         this.health -= damage;

@@ -1,13 +1,6 @@
 package com.example.olioharkkaty2;
 
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -20,15 +13,8 @@ public class CreateLutemonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_create_lutemon);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
     }
-
 
     public void createLutemon(View view) {
         EditText etName = findViewById(R.id.etLutemonName);
@@ -44,9 +30,38 @@ public class CreateLutemonActivity extends AppCompatActivity {
         }
 
         String color = selectedColor.getText().toString();
-        int attack = 10 + "Valkoinen Vihreä Pinkki Oranssi Musta".indexOf(color) / 8;
-        int defense = attack; // Oletetaan sama puolustus.
-        int health = attack;
+
+        int attack = 0, defense = 0, health = 0;
+        switch (color) {
+            case "Valkoinen":
+                attack = 5;
+                defense = 4;
+                health = 20;
+                break;
+            case "Vihreä":
+                attack = 6;
+                defense = 3;
+                health = 19;
+                break;
+            case "Pinkki":
+                attack = 7;
+                defense = 2;
+                health = 18;
+                break;
+            case "Oranssi":
+                attack = 8;
+                defense = 1;
+                health = 17;
+                break;
+            case "Musta":
+                attack = 9;
+                defense = 0;
+                health = 16;
+                break;
+            default:
+                Toast.makeText(this, "Tuntematon väri", Toast.LENGTH_SHORT).show();
+                return;
+        }
 
         Lutemon newLutemon = new Lutemon(Storage.getInstance().generateId(), name, color, attack, defense, health);
         Storage.getInstance().addLutemon(newLutemon);

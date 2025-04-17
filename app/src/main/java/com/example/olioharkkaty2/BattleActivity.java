@@ -15,7 +15,8 @@ public class BattleActivity extends AppCompatActivity {
 
     private ListView listViewLutemons;
     private TextView tvBattleLog;
-    private ArrayList<String> lutemonNames = new ArrayList<>();
+    private ArrayAdapter<String> adapter;
+    private final ArrayList<String> lutemonNames = new ArrayList<>();
     private ArrayList<Integer> lutemonIds = new ArrayList<>();
 
     @Override
@@ -33,12 +34,20 @@ public class BattleActivity extends AppCompatActivity {
         lutemonIds.clear();
 
         for (Map.Entry<Integer, Lutemon> entry : Storage.getInstance().getAllLutemons().entrySet()) {
+            int lutemonId = entry.getKey();
             Lutemon lutemon = entry.getValue();
-            lutemonNames.add(lutemon.getName() + " (" + lutemon.getColor() + ")");
-            lutemonIds.add(lutemon.getId());
+
+            String location = Storage.getInstance().getLutemonLocation(lutemonId);
+            if ("Areena".equals(location)) {
+                lutemonNames.add(lutemon.getName() + " (" + lutemon.getColor() + ") - Hyökkäys: "
+                        + lutemon.getAttack() + ", Puolustus: " + lutemon.getDefense()
+                        + ", Kokemus: " + lutemon.getExperience() + ", Elämäpisteet: "
+                        + lutemon.getHealth() + "/" + lutemon.getMaxHealth());
+                lutemonIds.add(lutemonId);
+            }
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+        adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice,
                 lutemonNames);
         listViewLutemons.setAdapter(adapter);
@@ -53,7 +62,7 @@ public class BattleActivity extends AppCompatActivity {
         }
 
         if (selectedLutemons.size() != 2) {
-            Toast.makeText(this, "Valitse tasan kaksi Lutemonia", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Valitse kaksi Lutemonia", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -64,6 +73,15 @@ public class BattleActivity extends AppCompatActivity {
         String log = battleField.fight(lutemon1, lutemon2);
 
         tvBattleLog.setText(log);
+
+        if (!lutemon1.isAlive()) {
+            Storage.getInstance().removeLutemonFromAllPlaces(lutemon1.getId());
+        }
+        if (!lutemon2.isAlive()) {
+            Storage.getInstance().removeLutemonFromAllPlaces(lutemon2.getId());
+        }
+
         loadLutemons();
     }
 }
+

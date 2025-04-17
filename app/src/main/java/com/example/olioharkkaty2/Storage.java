@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Storage {
     private static Storage instance;
     private HashMap<Integer, Lutemon> lutemons = new HashMap<>();
-    private HashMap<Integer, String> lutemonLocations = new HashMap<>();  // Sijaintien tallentaminen
+    private HashMap<Integer, String> lutemonLocations = new HashMap<>();
     private int idCounter = 0;
 
     private Storage() {}
@@ -19,11 +19,13 @@ public class Storage {
 
     public void addLutemon(Lutemon lutemon) {
         lutemons.put(lutemon.getId(), lutemon);
+        lutemonLocations.put(lutemon.getId(), "Koti");
     }
 
-    public void removeLutemon(int id) {
-        lutemons.remove(id);
-        lutemonLocations.remove(id);  // Poistetaan myös sijainti
+
+    public void removeLutemonFromAllPlaces(int lutemonId) {
+        lutemons.remove(lutemonId);
+        lutemonLocations.remove(lutemonId);
     }
 
     public Lutemon getLutemon(int id) {
@@ -38,32 +40,38 @@ public class Storage {
         return idCounter++;
     }
 
-    // Poista Lutemon nykyisestä sijainnista
     public void removeLutemonFromCurrentLocation(int lutemonId) {
-        lutemonLocations.remove(lutemonId);  // Poistetaan sijainti
+        lutemonLocations.remove(lutemonId);
     }
 
-    // Määrittele Lutemon uusi sijainti
+
     public void setLutemonLocation(int lutemonId, String location) {
-        lutemonLocations.put(lutemonId, location);  // Tallennetaan sijainti
+        lutemonLocations.put(lutemonId, location);
+        Lutemon lutemon = lutemons.get(lutemonId);
+        if (lutemon != null) {
+            lutemon.setLocation(location);
+        }
     }
 
-    // Hae Lutemonin sijainti
     public String getLutemonLocation(int lutemonId) {
-        return lutemonLocations.get(lutemonId);  // Palauttaa sijainnin
+        String location = lutemonLocations.get(lutemonId);
+        if (location == null) {
+            Lutemon lutemon = lutemons.get(lutemonId);
+            return lutemon != null ? lutemon.getLocation() : "Tuntematon";
+        }
+        return location;
     }
 
-    // Siirrä Lutemon "Kotiin"
     public void moveToHome(Lutemon lutemon) {
         setLutemonLocation(lutemon.getId(), "Koti");
+        lutemon.heal();
     }
 
-    // Siirrä Lutemon "Treeniin"
     public void moveToTrainingArea(Lutemon lutemon) {
         setLutemonLocation(lutemon.getId(), "Treeni");
+        lutemon.addExperience();
     }
 
-    // Siirrä Lutemon "Areenalle"
     public void moveToBattleField(Lutemon lutemon) {
         setLutemonLocation(lutemon.getId(), "Areena");
     }

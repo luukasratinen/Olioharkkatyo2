@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:id="@+id/main"> <!-- Lisää tämä ID:llä -->
+    android:id="@+id/main">
 
     <EditText
         android:id="@+id/etLutemonName"

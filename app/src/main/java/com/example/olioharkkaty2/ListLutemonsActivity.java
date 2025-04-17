@@ -19,27 +19,33 @@ public class ListLutemonsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_list_lutemons);
 
-        // Lisätään mainin padding, jos se on tarpeen
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Etsi tvLutemonList ja luo StringBuilder listaamista varten
         TextView tvLutemonList = findViewById(R.id.tvLutemonList);
         StringBuilder lutemonList = new StringBuilder();
 
-        // Käydään läpi kaikki Lutemonit Storage-luokasta
         for (Map.Entry<Integer, Lutemon> entry : Storage.getInstance().getAllLutemons().entrySet()) {
             Lutemon lutemon = entry.getValue();
-            lutemonList.append(lutemon.getName()) // lisää nimi
+            lutemonList.append(lutemon.getName())
                     .append(" (")
-                    .append(lutemon.getColor()) // lisää väri
-                    .append(")\n"); // lisää rivinvaihto
+                    .append(lutemon.getColor())
+                    .append(") - Hyökkäys: ")
+                    .append(lutemon.getAttack())
+                    .append(", Puolustus: ")
+                    .append(lutemon.getDefense())
+                    .append(", Kokemus: ")
+                    .append(lutemon.getExperience())
+                    .append(", Elämäpisteet: ")
+                    .append(lutemon.getHealth())
+                    .append("/")
+                    .append(lutemon.getMaxHealth())
+                    .append("\n");
         }
 
-        // Asetetaan tekstikenttä
         tvLutemonList.setText(lutemonList.toString());
     }
 }

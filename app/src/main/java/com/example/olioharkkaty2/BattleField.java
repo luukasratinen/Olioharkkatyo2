@@ -9,7 +9,7 @@ public class BattleField {
                     .append(" attacks ")
                     .append(lutemon2.getName())
                     .append("\n");
-            int damage = Math.max(0, lutemon1.getAttack() - lutemon2.getDefense());
+            int damage = Math.max(0, (lutemon1.getAttack() + lutemon1.getExperience()) - lutemon2.getDefense());
             lutemon2.takeDamage(damage);
 
             if (!lutemon2.isAlive()) {
@@ -22,7 +22,7 @@ public class BattleField {
                     .append(" counterattacks ")
                     .append(lutemon1.getName())
                     .append("\n");
-            damage = Math.max(0, lutemon2.getAttack() - lutemon1.getDefense());
+            damage = Math.max(0, (lutemon2.getAttack() + lutemon2.getExperience()) - lutemon1.getDefense());
             lutemon1.takeDamage(damage);
 
             if (!lutemon1.isAlive()) {

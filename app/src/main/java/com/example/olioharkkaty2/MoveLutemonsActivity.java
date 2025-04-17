@@ -41,7 +41,8 @@ public class MoveLutemonsActivity extends AppCompatActivity {
 
         for (Map.Entry<Integer, Lutemon> entry : Storage.getInstance().getAllLutemons().entrySet()) {
             Lutemon lutemon = entry.getValue();
-            lutemonNames.add(lutemon.getName() + " (" + lutemon.getColor() + ")");
+            String location = Storage.getInstance().getLutemonLocation(lutemon.getId()); // Hae sijainti
+            lutemonNames.add(lutemon.getName() + " (" + lutemon.getColor() + ") - " + location); // Näytä sijainti
             lutemonIds.add(lutemon.getId());
         }
 
@@ -59,15 +60,12 @@ public class MoveLutemonsActivity extends AppCompatActivity {
                 int lutemonId = lutemonIds.get(i);
                 Lutemon lutemon = Storage.getInstance().getLutemon(lutemonId);
 
-                // Poista Lutemon nykyisestä sijainnista
                 Storage.getInstance().removeLutemonFromCurrentLocation(lutemonId);
 
-                // Käsittele siirto
                 if (selectedLocation.equals("Koti")) {
                     Storage.getInstance().moveToHome(lutemon);
                 } else if (selectedLocation.equals("Treeni")) {
-                    TrainingArea trainingArea = new TrainingArea();
-                    trainingArea.train(lutemon);
+                    Storage.getInstance().moveToTrainingArea(lutemon); // Oikea metodi
                 } else if (selectedLocation.equals("Areena")) {
                     Storage.getInstance().moveToBattleField(lutemon);
                 }
@@ -76,7 +74,7 @@ public class MoveLutemonsActivity extends AppCompatActivity {
             }
         }
 
-        // Päivitä lista
         loadLutemons();
+
     }
 }
