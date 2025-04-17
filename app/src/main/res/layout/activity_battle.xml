@@ -17,12 +17,16 @@
         android:text="Taisteluun"
         android:onClick="startBattle" />
 
-    <TextView
-        android:id="@+id/tvBattleLog"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Taisteluloki tulee tähän."
-        android:textSize="16sp"
-        android:padding="8dp" />
-</LinearLayout>
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/tvBattleLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Taisteluloki tulee tähän."
+            android:textSize="16sp"
+            android:padding="8dp" />
+    </ScrollView>
+</LinearLayout>
