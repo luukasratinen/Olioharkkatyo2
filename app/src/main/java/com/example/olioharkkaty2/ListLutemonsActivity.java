@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.graphics.Color;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.Map;
 
@@ -25,27 +28,47 @@ public class ListLutemonsActivity extends AppCompatActivity {
             return insets;
         });
 
-        TextView tvLutemonList = findViewById(R.id.tvLutemonList);
-        StringBuilder lutemonList = new StringBuilder();
+        LinearLayout lutemonContainer = findViewById(R.id.svLutemonContainer);
 
         for (Map.Entry<Integer, Lutemon> entry : Storage.getInstance().getAllLutemons().entrySet()) {
             Lutemon lutemon = entry.getValue();
-            lutemonList.append(lutemon.getName())
+
+            TextView lutemonView = new TextView(this);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, // Leveys
+                    ViewGroup.LayoutParams.WRAP_CONTENT  // Korkeus
+            );
+            params.setMargins(0, 0, 0, 16);
+            lutemonView.setLayoutParams(params);
+
+            lutemonView.setBackgroundColor(Color.parseColor("#9370DB"));
+            lutemonView.setPadding(16, 16, 16, 16);
+
+            StringBuilder lutemonDetails = new StringBuilder();
+            lutemonDetails.append(lutemon.getName())
                     .append(" (")
                     .append(lutemon.getColor())
-                    .append(") - Hyökkäys: ")
+                    .append(")\n")
+                    .append("Hyökkäys: ")
                     .append(lutemon.getAttack())
-                    .append(", Puolustus: ")
+                    .append("\n")
+                    .append("Puolustus: ")
                     .append(lutemon.getDefense())
-                    .append(", Kokemus: ")
-                    .append(lutemon.getExperience())
-                    .append(", Elämäpisteet: ")
+                    .append("\n")
+                    .append("Elämä: ")
                     .append(lutemon.getHealth())
                     .append("/")
                     .append(lutemon.getMaxHealth())
-                    .append("\n");
-        }
+                    .append("\n")
+                    .append("Kokemus: ")
+                    .append(lutemon.getExperience());
 
-        tvLutemonList.setText(lutemonList.toString());
+            lutemonView.setText(lutemonDetails.toString());
+            lutemonView.setTextSize(16);
+            lutemonView.setTextColor(Color.BLACK);
+
+            lutemonContainer.addView(lutemonView);
+        }
     }
 }
