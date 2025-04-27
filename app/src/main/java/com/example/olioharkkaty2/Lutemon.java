@@ -1,9 +1,12 @@
 package com.example.olioharkkaty2;
 
 public class Lutemon {
+
+
     private int id;
     private String name;
     private String color;
+
     private int attack;
     private int defense;
     private int experience;
@@ -11,7 +14,10 @@ public class Lutemon {
     private int maxHealth;
     private String location = "Koti";
 
+
+
     public Lutemon(int id, String name, String color, int attack, int defense, int health) {
+
         this.id = id;
         this.name = name;
         this.color = color;
@@ -20,6 +26,7 @@ public class Lutemon {
         this.health = health;
         this.maxHealth = health;
         this.experience = 0;
+
     }
 
     public int getId() { return id; }
@@ -27,6 +34,8 @@ public class Lutemon {
     public String getColor() { return color; }
     public int getAttack() { return attack + experience; }
     public int getDefense() { return defense; }
+
+
     public int getHealth() { return health; }
     public int getExperience() { return experience; }
     public String getLocation() { return location; }
@@ -40,6 +49,7 @@ public class Lutemon {
         this.health -= damage;
     }
 
+
     public void heal() {
         this.health = maxHealth;
     }
@@ -48,7 +58,10 @@ public class Lutemon {
         this.experience++;
     }
 
+
+
     public boolean isAlive() {
         return health > 0;
     }
+
 }

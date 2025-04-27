@@ -16,14 +16,19 @@ import java.util.Map;
 
 public class ListLutemonsActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_list_lutemons);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
@@ -31,22 +36,31 @@ public class ListLutemonsActivity extends AppCompatActivity {
         LinearLayout lutemonContainer = findViewById(R.id.svLutemonContainer);
 
         for (Map.Entry<Integer, Lutemon> entry : Storage.getInstance().getAllLutemons().entrySet()) {
+
             Lutemon lutemon = entry.getValue();
 
             TextView lutemonView = new TextView(this);
 
+
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, // Leveys
-                    ViewGroup.LayoutParams.WRAP_CONTENT  // Korkeus
+
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+
+
             );
+
             params.setMargins(0, 0, 0, 16);
             lutemonView.setLayoutParams(params);
-
             lutemonView.setBackgroundColor(Color.parseColor("#9370DB"));
             lutemonView.setPadding(16, 16, 16, 16);
 
+
             StringBuilder lutemonDetails = new StringBuilder();
+
+
             lutemonDetails.append(lutemon.getName())
+
                     .append(" (")
                     .append(lutemon.getColor())
                     .append(")\n")
@@ -65,10 +79,15 @@ public class ListLutemonsActivity extends AppCompatActivity {
                     .append(lutemon.getExperience());
 
             lutemonView.setText(lutemonDetails.toString());
+
+
             lutemonView.setTextSize(16);
             lutemonView.setTextColor(Color.BLACK);
 
+
             lutemonContainer.addView(lutemonView);
         }
+
+
     }
 }
